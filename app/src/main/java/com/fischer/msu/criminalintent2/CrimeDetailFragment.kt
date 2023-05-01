@@ -11,8 +11,7 @@ import java.util.*
 
 class CrimeDetailFragment :Fragment() {
 
-    private lateinit var crime: Crime
-    //private lateinit var binding: FragmentCrimeDetailBinding
+    lateinit var crime: Crime
     private var _binding: FragmentCrimeDetailBinding? = null
         private val binding
             get() = checkNotNull(_binding){
