@@ -1,5 +1,6 @@
 package com.fischer.msu.criminalintent2
 
+import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
@@ -7,11 +8,16 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions.*
 import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
+
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import java.util.regex.Matcher
 
 class CrimeDetailFragmentTest {
+
+    //testing to see if i need an isVisible property:
+
 
     private lateinit var scenario: FragmentScenario<CrimeDetailFragment>
 

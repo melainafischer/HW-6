@@ -14,5 +14,4 @@ class CrimeListFragment: Fragment() {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "total Crimes : ${crimeListViewModel.crimes.size}")
     }
-
 }
