@@ -1,7 +1,6 @@
 package com.fischer.msu.criminalintent2
 
 import android.view.View
-import androidx.core.view.isVisible
 import androidx.fragment.app.testing.FragmentScenario
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.test.espresso.Espresso.onView
@@ -35,7 +34,7 @@ class CrimeDetailFragmentTest {
     fun checkBoxStateEqualsCrimeSolvedState() {
         scenario.onFragment { fragment ->
             // Check that the checkbox is visible
-            onView(withId(R.id.crime_solved)).check(matches(isVisible()))
+            onView(withId(R.id.crime_solved)).check(matches(isDisplayed()))
 
             // Check that the checkbox is unchecked by default
             onView(withId(R.id.crime_solved)).check(matches(isNotChecked()))
