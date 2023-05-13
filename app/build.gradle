@@ -39,7 +39,7 @@ buildFeatures{
 dependencies {
     implementation 'androidx.core:core-ktx:1.10.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.8.0'
+    implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     implementation 'androidx.fragment:fragment-ktx:1.5.7'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
@@ -53,6 +53,9 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.5.1'
     androidTestImplementation('androidx.test:runner:1.5.2')
     androidTestImplementation('androidx.test:rules:1.5.0')
+    //androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     debugImplementation "androidx.test:monitor:1.6.1"
+    androidTestImplementation 'org.hamcrest:hamcrest-library:2.2'
+
 
 }
