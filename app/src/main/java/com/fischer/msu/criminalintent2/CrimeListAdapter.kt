@@ -89,7 +89,7 @@ class CrimeListAdapter(private val onCrimeClickListener: OnItemClickListener) :
         if (holder is CrimeHolder) {
             holder.bind(crime)
         } else if (holder is PoliceHolder) {
-            holder.bind(crime)
+            holder.bind(crime, onCrimeClicked)
         }
     }
 
