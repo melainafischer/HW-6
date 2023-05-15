@@ -39,7 +39,6 @@ class CrimeDetailFragment :Fragment() {
         return binding.root
     }
 
-    //Wiring up views in fragment
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

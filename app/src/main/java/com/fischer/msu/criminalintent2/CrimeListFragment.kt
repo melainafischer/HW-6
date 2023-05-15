@@ -40,7 +40,7 @@ class CrimeListFragment : Fragment(), CrimeListAdapter.OnItemClickListener {
     }
 
     fun onCrimeClick(crimeId: UUID) {
-        // Handle the click event for a specific crime here
+        // need to add the handl for the click event for a specific crime here
     }
 
     override fun onItemClick(crime: Crime) {
@@ -48,7 +48,7 @@ class CrimeListFragment : Fragment(), CrimeListAdapter.OnItemClickListener {
     }
 
     override fun onContactPoliceClick(crime: Crime) {
-        // Handle the contact police event for a specific crime here
+        // need to add the handle for the contact police event for a specific crime here
     }
 
     override fun onDestroyView() {
