@@ -29,8 +29,15 @@ class CrimeHolder(
         } else {
             View.GONE
         }
+
+        binding.crimeSolved.visibility = if (crime.isSolved) {
+            View.VISIBLE
+            }
+        else{
+            View.GONE
+            }
+        }
     }
-}
 
 class PoliceHolder(
     private val binding: ListItemCrimePoliceBinding,
