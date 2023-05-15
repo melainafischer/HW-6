@@ -6,6 +6,9 @@ plugins {
 android {
     namespace 'com.fischer.msu.criminalintent2'
     compileSdk 33
+    dataBinding {
+        enabled = true
+    }
 
     defaultConfig {
         applicationId "com.fischer.msu.criminalintent2"
@@ -56,6 +59,4 @@ dependencies {
     //androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     debugImplementation "androidx.test:monitor:1.6.1"
     androidTestImplementation 'org.hamcrest:hamcrest-library:2.2'
-
-
 }

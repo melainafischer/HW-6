@@ -1,46 +1,104 @@
 package com.fischer.msu.criminalintent2
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.fischer.msu.criminalintent2.databinding.ListItemCrimeBinding
+import com.fischer.msu.criminalintent2.databinding.ListItemCrimePoliceBinding
+import android.text.format.DateFormat
+import java.util.*
 
-class CrimeHolder (
-    private val binding: ListItemCrimeBinding
-): RecyclerView.ViewHolder(binding.root) {
+class CrimeHolder(
+    private val binding: ListItemCrimePoliceBinding,
+    private val onCrimeClickListener: CrimeListAdapter.OnItemClickListener
+) : RecyclerView.ViewHolder(binding.root) {
+
     fun bind(crime: Crime) {
         binding.crimeTitle.text = crime.title
-        binding.crimeDate.text = crime.date.toString()
+
+        // Format the date
+        val formattedDate = DateFormat.format("MMM d, yyyy", crime.date).toString()
+        binding.crimeDate.text = formattedDate
 
         binding.root.setOnClickListener {
-            Toast.makeText(
-                binding.root.context,
-                "${crime.title} clicked!",
-                Toast.LENGTH_SHORT
-            ).show()
+            onCrimeClickListener.onItemClick(crime)
+        }
+
+        binding.crimeSolved.visibility = if (crime.isSolved) {
+            View.VISIBLE
+        } else {
+            View.GONE
         }
     }
 }
 
-class CrimeListAdapter (private val crimes: List<Crime>): RecyclerView.Adapter<CrimeHolder>(){
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CrimeHolder {
+class PoliceHolder(
+    private val binding: ListItemCrimePoliceBinding,
+    private val onCrimeClickListener: CrimeListAdapter.OnItemClickListener
+) : RecyclerView.ViewHolder(binding.root) {
 
-        val inflater = LayoutInflater.from(parent.context)
-        val binding = ListItemCrimeBinding.inflate(inflater, parent, false)
-        return CrimeHolder(binding)
+    fun bind(crime: Crime) {
+        binding.crimeTitle.text = crime.title
+
+        // Format the date
+        val formattedDate = DateFormat.format("MMM d, yyyy", crime.date).toString()
+        binding.crimeDate.text = formattedDate
+
+        binding.contactPoliceButton.setOnClickListener {
+            onCrimeClickListener.onContactPoliceClick(crime)
+        }
+    }
+}
 
 
+class CrimeListAdapter(private val onCrimeClickListener: OnItemClickListener) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
+    companion object {
+        const val VIEW_TYPE_NORMAL = 1
+        const val VIEW_TYPE_POLICE = 2
     }
 
-    override fun onBindViewHolder(holder: CrimeHolder, position: Int) {
-        val crime = crimes[position]
-        /*holder.apply {
-            binding.crimeTitle.text = crime.title
-            binding.crimeDate.text = crime.date.toString()*/
-        holder.bind(crime)
-        }
-    override fun getItemCount() = crimes.size
+    private var crimeList = emptyList<Crime>()
 
-        //holder.bind(crime)
+    interface OnItemClickListener {
+        fun onItemClick(crime: Crime)
+        fun onContactPoliceClick(crime: Crime)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        val inflater = LayoutInflater.from(parent.context)
+        return if (viewType == VIEW_TYPE_POLICE) {
+            val binding = ListItemCrimePoliceBinding.inflate(inflater, parent, false)
+            PoliceHolder(binding, onCrimeClickListener)
+        } else {
+            val binding = ListItemCrimePoliceBinding.inflate(inflater, parent, false)
+            CrimeHolder(binding, onCrimeClickListener)
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val crime = crimeList[position]
+        if (holder is CrimeHolder) {
+            holder.bind(crime)
+        } else if (holder is PoliceHolder) {
+            holder.bind(crime)
+        }
+    }
+
+    override fun getItemCount(): Int = crimeList.size
+
+    override fun getItemViewType(position: Int): Int {
+        val crime = crimeList[position]
+        return if (crime.requiresPolice) {
+            VIEW_TYPE_POLICE
+        } else {
+            VIEW_TYPE_NORMAL
+        }
+    }
+
+    fun setCrimeList(crimeList: List<Crime>) {
+        this.crimeList = crimeList
+        notifyDataSetChanged()
+    }
 }

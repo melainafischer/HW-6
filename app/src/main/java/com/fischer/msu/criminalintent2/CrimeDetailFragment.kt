@@ -45,7 +45,6 @@ class CrimeDetailFragment :Fragment() {
 
         binding.apply {
 
-            //listener for edit text
             crimeTitle.doOnTextChanged { text, _, _, _ ->
                 crime = crime.copy(title = text.toString())
             }
